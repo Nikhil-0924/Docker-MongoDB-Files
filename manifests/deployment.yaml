@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clone
+  labels:
+    app: clone
+    kubernetes.azure.com/generator: devhub
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clone
+  template:
+    metadata:
+      labels:
+        app: clone
+    spec:
+      containers:
+        - name: clone
+          image: cluregistry.azurecr.io/image-workflow-1732255887995:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
